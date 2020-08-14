@@ -1,9 +1,4 @@
-from flask import Flask
 from random import choice
-import requests
-
-#import pyttsx3 as ptx
-app = Flask(__name__)
 
 def get_random_joke(joke_category = None):
     available_joke_categories = ["general", "programming", "knock-knock"]
@@ -17,19 +12,3 @@ def get_random_joke(joke_category = None):
     joke_setup = joke_resp_json.get("setup")
     joke_punchline = joke_resp_json.get("punchline")
     return (joke_type, joke_setup, joke_punchline)
-
-@app.route("/")
-def index():
-    #ptx.speak("Welcome")
-    return "<h1> Hello World 123! </h1>"
-
-@app.route("/joke")
-def get_joke(joke_category:str = None):
-    _, joke_setup, joke_punchline = get_random_joke()
-    html_str = "<h1> " + joke_setup +  " </h1>" + "<p>"
-    html_str += "<h2> " + joke_punchline +  " </h2>" 
-    return html_str
-
-if __name__ == "__main__":
-    app.run(debug= True)
-
