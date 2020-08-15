@@ -1,5 +1,6 @@
-from flask import Flask
+from flask import Flask, render_template
 from funcs import get_random_joke
+import os
 
 #import pyttsx3 as ptx
 app = Flask(__name__)
@@ -13,9 +14,12 @@ def index():
     html_str += "<h2> " + joke_punchline +  " </h2>" 
     return html_str
 
-# @app.route("/joke")
+@app.route("/crypto")
+def crypto():
+    return render_template("crypto.html")
 
 
 if __name__ == "__main__":
-    app.run(debug= True)
+
+    app.run(debug = os.environ.get("debug_flag", True))
 
